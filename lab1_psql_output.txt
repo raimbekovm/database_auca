@@ -1,0 +1,19 @@
+                         List of databases
+   Name    | Owner | Encoding | Collate | Ctype | Access privileges 
+-----------+-------+----------+---------+-------+-------------------
+ postgres  | admin | UTF8     | C       | C     | 
+ template0 | admin | UTF8     | C       | C     | =c/admin         +
+           |       |          |         |       | admin=CTc/admin
+ template1 | admin | UTF8     | C       | C     | =c/admin         +
+           |       |          |         |       | admin=CTc/admin
+(3 rows)
+
+CREATE TABLE
+INSERT 0 2
+ id | name  | age 
+----+-------+-----
+  1 | Alice |  21
+  2 | Bob   |  23
+(2 rows)
+
+DROP TABLE
