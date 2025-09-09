@@ -1,0 +1,138 @@
+%
+
+admin@MacBook-Air database_auca % 
+
+% 
+
+admin@MacBook-Air database_auca % psql -U postgres -d universitypsql -U postgres -d university
+
+psql (14.19 (Homebrew), server 17.6 (Homebrew))
+WARNING: psql major version 14, server major version 17.
+ Some psql features might not work.
+Type "help" for help.
+
+university=# CREATE TABLE students (student_id SERIAL PRIMARY KEY, first_name VARCHAR(50) NOT NULL, last_name VARCHAR(50) NOT NULL, email VARCHAR(100) UNIQUE NOT NULL, faculty VARCHAR(100));
+CREATE TABLE students (student_id SERIAL PRIMARY KEY, first_name VARCHAR(50) NOT NULL, last_name VARCHAR(50) NOT NULL, email VARCHAR(100) UNIQUE NOT NULL, faculty VARCHAR(100));
+
+CREATE TABLE
+university=# 
+
+university=# \d students
+
+ Table "public.students"
+ Column | Type | Collation | Nullable | Default 
+------------+------------------------+-----------+----------+----------------------------------------------
+ student_id | integer | | not null | nextval('students_student_id_seq'::regclass)
+ first_name | character varying(50) | | not null | 
+ last_name | character varying(50) | | not null | 
+ email | character varying(100) | | not null | 
+ faculty | character varying(100) | | | 
+Indexes:
+ "students_pkey" PRIMARY KEY, btree (student_id)
+ "students_email_key" UNIQUE CONSTRAINT, btree (email)
+
+university=# CREATE TABLE courses (course_id SERIAL PRIMARY KEY, course_name VARCHAR(100) NOT NULL, credits INTEGER CHECK (credits > 0 AND credits <= 6), is_active BOOLEAN DEFAULT true, created_date DATE DEFAULT CURRENT_DATE);CREATE TABLE courses (course_id SERIAL PRIMARY KEY, course_name VARCHAR(100) NOT NULL, credits INTEGER CHECK (credits > 0 AND credits <= 6), is_active BOOLEAN DEFAULT true, created_date DATE DEFAULT CURRENT_DATE);
+
+CREATE TABLE
+university=# 
+
+university=# \d courses
+
+ Table "public.courses"
+ Column | Type | Collation | Nullable | Default 
+--------------+------------------------+-----------+----------+--------------------------------------------
+ course_id | integer | | not null | nextval('courses_course_id_seq'::regclass)
+ course_name | character varying(100) | | not null | 
+ credits | integer | | | 
+ is_active | boolean | | | true
+ created_date | date | | | CURRENT_DATE
+Indexes:
+ "courses_pkey" PRIMARY KEY, btree (course_id)
+Check constraints:
+ "courses_credits_check" CHECK (credits > 0 AND credits <= 6)
+
+university=# ALTER TABLE students ADD COLUMN enrollment_date DATE;
+ALTER TABLE students ADD COLUMN enrollment_date DATE;
+
+ALTER TABLE
+university=# 
+
+university=# ALTER TABLE students ALTER COLUMN faculty TYPE TEXT;
+ALTER TABLE students ALTER COLUMN faculty TYPE TEXT;
+
+ALTER TABLE
+university=# 
+
+university=# ALTER TABLE students ADD CONSTRAINT check_enrollment_date CHECK (enrollment_date >= '2020-01-01');ALTER TABLE students ADD CONSTRAINT check_enrollment_date CHECK (enrollment_date >= '2020-01-01');
+
+ALTER TABLE
+university=# 
+
+university=# ALTER TABLE students RENAME COLUMN faculty TO department;
+ALTER TABLE students RENAME COLUMN faculty TO department;
+
+ALTER TABLE
+university=# 
+
+university=# \d students
+
+ Table "public.students"
+ Column | Type | Collation | Nullable | Default 
+-----------------+------------------------+-----------+----------+----------------------------------------------
+ student_id | integer | | not null | nextval('students_student_id_seq'::regclass)
+ first_name | character varying(50) | | not null | 
+ last_name | character varying(50) | | not null | 
+ email | character varying(100) | | not null | 
+ department | text | | | 
+ enrollment_date | date | | | 
+Indexes:
+ "students_pkey" PRIMARY KEY, btree (student_id)
+ "students_email_key" UNIQUE CONSTRAINT, btree (email)
+Check constraints:
+ "check_enrollment_date" CHECK (enrollment_date >= '2020-01-01'::date)
+
+university=# 
+
+university=# CREATE TEMP TABLE temp_student_backup (id INTEGER, name TEXT, email TEXT);
+CREATE TEMP TABLE temp_student_backup (id INTEGER, name TEXT, email TEXT);
+
+CREATE TABLE
+university=# 
+
+university=# \d temp_student_backup
+\d temp_student_backup
+
+ Table "pg_temp_26.temp_student_backup"
+ Column | Type | Collation | Nullable | Default 
+--------+---------+-----------+----------+---------
+ id | integer | | | 
+ name | text | | | 
+ email | text | | | 
+
+university=# DROP TABLE temp_student_backup;
+DROP TABLE temp_student_backup;
+
+DROP TABLE
+university=# 
+
+university=# DROP TABLE IF EXISTS non_existent_table;
+DROP TABLE IF EXISTS non_existent_table;
+
+NOTICE: table "non_existent_table" does not exist, skipping
+DROP TABLE
+university=# 
+
+university=# \dt
+
+ List of relations
+ Schema | Name | Type | Owner 
+--------+----------+-------+----------
+ public | courses | table | postgres
+ public | students | table | postgres
+(2 rows)
+
+university=# 
+
+university=# \q
+
+admin@MacBook-Air database_auca % exit
