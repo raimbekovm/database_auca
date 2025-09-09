@@ -1,0 +1,96 @@
+admin@MacBook-Air database_auca %
+
+% 
+
+admin@MacBook-Air database_auca % psql -U postgrespsql -U postgres
+
+psql (14.19 (Homebrew), server 17.6 (Homebrew))
+WARNING: psql major version 14, server major version 17.
+ Some psql features might not work.
+Type "help" for help.
+
+postgres=# 
+
+postgres=# \l
+
+ List of databases
+ Name | Owner | Encoding | Collate | Ctype | Access privileges 
+-----------+-------+----------+---------+-------+-------------------
+ auca_lab | admin | UTF8 | C | C | 
+ postgres | admin | UTF8 | C | C | 
+ template0 | admin | UTF8 | C | C | =c/admin +
+ | | | | | admin=CTc/admin
+ template1 | admin | UTF8 | C | C | =c/admin +
+ | | | | | admin=CTc/admin
+(4 rows)
+
+postgres=# 
+
+postgres=# CREATE DATABASE university;
+CREATE DATABASE university;
+
+CREATE DATABASE
+postgres=# 
+
+postgres=# \c university
+\c university
+
+psql (14.19 (Homebrew), server 17.6 (Homebrew))
+WARNING: psql major version 14, server major version 17.
+ Some psql features might not work.
+You are now connected to database "university" as user "postgres".
+university=# 
+
+university=# \c postgres
+
+psql (14.19 (Homebrew), server 17.6 (Homebrew))
+WARNING: psql major version 14, server major version 17.
+ Some psql features might not work.
+You are now connected to database "postgres" as user "postgres".
+postgres=# 
+
+postgres=# CREATE DATABASE student_records;
+CREATE DATABASE student_records;
+
+CREATE DATABASE
+postgres=# 
+
+postgres=# \l
+
+ List of databases
+ Name | Owner | Encoding | Collate | Ctype | Access privileges 
+-----------------+----------+----------+---------+-------+-------------------
+ auca_lab | admin | UTF8 | C | C | 
+ postgres | admin | UTF8 | C | C | 
+ student_records | postgres | UTF8 | C | C | 
+ template0 | admin | UTF8 | C | C | =c/admin +
+ | | | | | admin=CTc/admin
+ template1 | admin | UTF8 | C | C | =c/admin +
+ | | | | | admin=CTc/admin
+ university | postgres | UTF8 | C | C | 
+(6 rows)
+
+postgres=# 
+
+postgres=# DROP DATABASE student_records;
+DROP DATABASE student_records;
+
+DROP DATABASE
+postgres=# 
+
+postgres=# DROP DATABASE IF EXISTS non_existent_db;
+DROP DATABASE IF EXISTS non_existent_db;
+
+NOTICE: database "non_existent_db" does not exist, skipping
+DROP DATABASE
+postgres=# 
+
+postgres=# \q
+
+% 
+
+admin@MacBook-Air database_auca % 
+
+% 
+
+admin@MacBook-Air database_auca % exit
