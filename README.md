@@ -62,7 +62,7 @@ By completing this course and repository, I will be able to:
 ✔ Understand basic NoSQL concepts   
 
 ### 📑 Course Requirements   
-Completion of all lab assignments (uploaded here)   
+Completion of all lab assignments   
 Submission of Oracle Academy Database Course certificate    
 Team-based final project uploaded to GitHub/GitLab  
 
